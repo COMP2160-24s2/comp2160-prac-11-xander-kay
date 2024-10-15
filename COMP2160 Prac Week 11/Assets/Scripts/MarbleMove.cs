@@ -46,6 +46,7 @@ public class MarbleMove : MonoBehaviour
 #region FixedUpdate
     void FixedUpdate()
     {
+        Debug.Log();
         if (target.HasValue) 
         {
             Vector3 dir = target.Value - rigidbody.position;
