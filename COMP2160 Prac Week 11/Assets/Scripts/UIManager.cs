@@ -18,7 +18,6 @@ public class UIManager : MonoBehaviour
 #region UI Elements
     [SerializeField] private Transform crosshair;
     [SerializeField] private Transform target;
-    private Camera cam;
 #endregion 
 
 #region Singleton
@@ -43,6 +42,7 @@ public class UIManager : MonoBehaviour
 
 #region Init & Destroy
 public LayerMask wallLayer;
+private Camera cam;
     void Awake()
     {
         if (instance != null)
@@ -56,10 +56,9 @@ public LayerMask wallLayer;
         mouseAction = actions.mouse.position;
         deltaAction = actions.mouse.delta;
         selectAction = actions.mouse.select;
-        cam = Camera.main;
-
         Cursor.visible = false;
         target.gameObject.SetActive(false);
+        cam = Camera.main;
     }
 
     void OnEnable()
@@ -83,9 +82,9 @@ public LayerMask wallLayer;
     private void MoveCrosshair() 
     {
         Vector2 mousePos = mouseAction.ReadValue<Vector2>();
-        Debug.Log(mousePos);
-        //crosshair.position = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, 10));
-        Ray ray = cam.ScreenPointtoRay(mousePos);
+        //Debug.Log(mousePos);
+        crosshair.position = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, 10));
+        Ray ray = cam.ScreenPointToRay(mousePos);
         if(Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, wallLayer))
         {
             Vector3 crosshairPos = hit.point;

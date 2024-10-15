@@ -10,7 +10,7 @@ public class CameraZoom : MonoBehaviour
     [Range(50,120)]
     [SerializeField] private float perspectiveCameraZoomRange;
 
-    private Camera cam;
+    [SerializeField] private Camera cam;
 
     #region Actions
         private Actions actions;
@@ -21,17 +21,27 @@ public class CameraZoom : MonoBehaviour
     {
         actions = new Actions();
         zoomAction = actions.camera.zoom;
-        cam = GetComponent<Camera>();
+        //cam = GetComponent<Camera>();
+        cam = Camera.main;
+        //OnEnable();
+        
+    }
+    void OnEnable(){
+        zoomAction.Enable();
+        actions.camera.Enable();
     }
 
     // Update is called once per frame
     void Update()
     {
+
         if(cam.orthographic)
         {
             cam.orthographicSize = orthographicCameraZoomRange;
         } else {
             cam.fieldOfView = perspectiveCameraZoomRange;
         }
+        //cam.transform(zoomAction.x,zoomAction.y,0);
     }
 }
+//Needs to readValue into from the InputAction

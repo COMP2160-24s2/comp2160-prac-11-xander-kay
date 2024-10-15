@@ -494,6 +494,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0bdee0f7f18ac64497420f2e9662712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  orthographicCameraZoomRange: 5
+  perspectiveCameraZoomRange: 50
+  cam: {fileID: 2408856355099670849}
 --- !u!4 &952537600
 Transform:
   m_ObjectHideFlags: 0
