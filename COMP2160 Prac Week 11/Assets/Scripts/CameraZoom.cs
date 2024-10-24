@@ -5,12 +5,15 @@ using UnityEngine.InputSystem;
 
 public class CameraZoom : MonoBehaviour
 {
+    
     [Range(5,10)]
     [SerializeField] private float orthographicCameraZoomRange;
     [Range(50,120)]
     [SerializeField] private float perspectiveCameraZoomRange;
 
     [SerializeField] private Camera cam;
+    private float zoomSpeed = 5;
+
 
     #region Actions
         private Actions actions;
@@ -23,16 +26,17 @@ public class CameraZoom : MonoBehaviour
         zoomAction = actions.camera.zoom;
         cam = Camera.main;
         
-        
     }
     void OnEnable(){
         zoomAction.Enable();
         actions.camera.Enable();
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(zoomAction.ReadValue<float>());
 
         if(cam.orthographic)
         {
@@ -40,7 +44,7 @@ public class CameraZoom : MonoBehaviour
         } else {
             cam.fieldOfView = perspectiveCameraZoomRange;
         }
-        cam.transform(zoomAction.x,zoomAction.y,0);
+        transform.Translate(Vector3.down * zoomAction.ReadValue<float>() * zoomSpeed * Time.deltaTime, Space.World);
     }
 }
 //Needs to readValue into from the InputAction
