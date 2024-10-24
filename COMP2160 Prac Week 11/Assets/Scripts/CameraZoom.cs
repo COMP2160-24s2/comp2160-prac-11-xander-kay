@@ -21,9 +21,8 @@ public class CameraZoom : MonoBehaviour
     {
         actions = new Actions();
         zoomAction = actions.camera.zoom;
-        //cam = GetComponent<Camera>();
         cam = Camera.main;
-        //OnEnable();
+        
         
     }
     void OnEnable(){
@@ -41,7 +40,7 @@ public class CameraZoom : MonoBehaviour
         } else {
             cam.fieldOfView = perspectiveCameraZoomRange;
         }
-        //cam.transform(zoomAction.x,zoomAction.y,0);
+        cam.transform(zoomAction.x,zoomAction.y,0);
     }
 }
 //Needs to readValue into from the InputAction

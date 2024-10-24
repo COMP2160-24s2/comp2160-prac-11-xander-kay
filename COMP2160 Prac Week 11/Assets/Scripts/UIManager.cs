@@ -85,10 +85,12 @@ private Camera cam;
         //Debug.Log(mousePos);
         crosshair.position = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, 10));
         Ray ray = cam.ScreenPointToRay(mousePos);
+        Debug.DrawRay(ray.origin, ray.direction * 100f, Color.red, 2f);
         if(Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, wallLayer))
         {
             Vector3 crosshairPos = hit.point;
             crosshair.position = crosshairPos;
+
         }
 
         // FIXME: Move the crosshair position to the mouse position (in world coordinates)
